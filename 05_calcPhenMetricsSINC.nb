@@ -1,0 +1,2950 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    157033,       2942]
+NotebookOptionsPosition[    155729,       2912]
+NotebookOutlinePosition[    156131,       2928]
+CellTagsIndexPosition[    156088,       2925]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "Calculation", " ", "of", " ", "phenological", " ", "metrics", " ", "and", 
+   " ", "output", " ", "for", " ", "use", " ", "in", " ", "06", 
+   RowBox[{"_plotPhenMetrics", ".", "sas"}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.9265846993430257`*^9, 3.9265847429706306`*^9}, {
+  3.926584777552783*^9, 
+  3.926584781884975*^9}},ExpressionUUID->"4cf1ddf0-db14-4b86-b1ce-\
+a010b04bb1cc"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"dataset", "=", 
+  RowBox[{"Import", "[", 
+   RowBox[{
+   "\"\<C:\\\\Paul\\\\2021-\\\\Projets structurants\\\\DS AMII \
+FORESEA\\\\Work\\\\TSA Herring\\\\SAS \
+Results\\\\premathematica_logbkC.csv\>\"", ",", "\"\<Dataset\>\"", ",", 
+    RowBox[{"\"\<HeaderLines\>\"", "\[Rule]", "1"}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8946840987331734`*^9, 3.8946841013174477`*^9}, 
+   3.8946842686093884`*^9, {3.894941282586817*^9, 3.8949412891585875`*^9}, {
+   3.8949414043031645`*^9, 3.894941436253832*^9}, {3.894941503358051*^9, 
+   3.894941529815673*^9}, {3.894941565257671*^9, 3.8949415900025663`*^9}, {
+   3.894941650329093*^9, 3.894941698070454*^9}, {3.8953078022846923`*^9, 
+   3.8953078035499215`*^9}, {3.904272785756352*^9, 3.9042728060105343`*^9}, 
+   3.9043718010170083`*^9, {3.905500291147893*^9, 3.90550029774588*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"387e6144-6e4f-475b-8500-08105472f35f"],
+
+Cell[BoxData[
+ TagBox[
+  TagBox[
+   DynamicModuleBox[{TypeSystem`NestedGrid`PackagePrivate`$state$$ = <|
+    "InitialData" -> {<|
+       "ref_year" -> 1999, "ref_month" -> 0, "pred_hat" -> 0.3320948129, 
+        "yearmonth" -> 1999, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 1, "pred_hat" -> 0.1672676898, 
+        "yearmonth" -> 1999.0833333, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 2, "pred_hat" -> 0.1658316736, 
+        "yearmonth" -> 1999.1666667, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 3, "pred_hat" -> 1.7156203019, 
+        "yearmonth" -> 1999.25, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 4, "pred_hat" -> 12.894933056, 
+        "yearmonth" -> 1999.3333333, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 5, "pred_hat" -> 12.064375115, 
+        "yearmonth" -> 1999.4166667, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 6, "pred_hat" -> 7.1977426206, 
+        "yearmonth" -> 1999.5, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 7, "pred_hat" -> 4.5029076575, 
+        "yearmonth" -> 1999.5833333, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 8, "pred_hat" -> 0.4278098594, 
+        "yearmonth" -> 1999.6666667, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 9, "pred_hat" -> 0.0123612837, 
+        "yearmonth" -> 1999.75, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 10, "pred_hat" -> 0.0052193806, 
+        "yearmonth" -> 1999.8333333, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 1999, "ref_month" -> 11, "pred_hat" -> 0.0592270432, 
+        "yearmonth" -> 1999.9166667, "theta_grav" -> 4.9690852754|>, <|
+       "ref_year" -> 2000, "ref_month" -> 0, "pred_hat" -> 0.1806439414, 
+        "yearmonth" -> 2000, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 1, "pred_hat" -> 0.201853998, 
+        "yearmonth" -> 2000.0833333, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 2, "pred_hat" -> 0.1909603323, 
+        "yearmonth" -> 2000.1666667, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 3, "pred_hat" -> 1.2272999306, 
+        "yearmonth" -> 2000.25, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 4, "pred_hat" -> 11.941141044, 
+        "yearmonth" -> 2000.3333333, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 5, "pred_hat" -> 17.687633951, 
+        "yearmonth" -> 2000.4166667, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 6, "pred_hat" -> 9.0046240512, 
+        "yearmonth" -> 2000.5, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 7, "pred_hat" -> 6.4194046025, 
+        "yearmonth" -> 2000.5833333, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 8, "pred_hat" -> 1.9125900425, 
+        "yearmonth" -> 2000.6666667, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 9, "pred_hat" -> 0.1052941324, 
+        "yearmonth" -> 2000.75, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 10, "pred_hat" -> 0.0135851968, 
+        "yearmonth" -> 2000.8333333, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2000, "ref_month" -> 11, "pred_hat" -> 0.0325393649, 
+        "yearmonth" -> 2000.9166667, "theta_grav" -> 5.2502533501|>, <|
+       "ref_year" -> 2001, "ref_month" -> 0, "pred_hat" -> 0.0942385415, 
+        "yearmonth" -> 2001, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 1, "pred_hat" -> 0.1047525984, 
+        "yearmonth" -> 2001.0833333, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 2, "pred_hat" -> 0.2377935072, 
+        "yearmonth" -> 2001.1666667, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 3, "pred_hat" -> 2.9080658496, 
+        "yearmonth" -> 2001.25, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 4, "pred_hat" -> 18.564329871, 
+        "yearmonth" -> 2001.3333333, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 5, "pred_hat" -> 15.487694873, 
+        "yearmonth" -> 2001.4166667, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 6, "pred_hat" -> 10.834306706, 
+        "yearmonth" -> 2001.5, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 7, "pred_hat" -> 14.565740525, 
+        "yearmonth" -> 2001.5833333, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 8, "pred_hat" -> 4.207286665, 
+        "yearmonth" -> 2001.6666667, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 9, "pred_hat" -> 0.1509506162, 
+        "yearmonth" -> 2001.75, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 10, "pred_hat" -> 0.0158231213, 
+        "yearmonth" -> 2001.8333333, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2001, "ref_month" -> 11, "pred_hat" -> 0.028925437, 
+        "yearmonth" -> 2001.9166667, "theta_grav" -> 5.4351092372|>, <|
+       "ref_year" -> 2002, "ref_month" -> 0, "pred_hat" -> 0.1747579443, 
+        "yearmonth" -> 2002, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 1, "pred_hat" -> 0.1273312917, 
+        "yearmonth" -> 2002.0833333, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 2, "pred_hat" -> 0.2036301976, 
+        "yearmonth" -> 2002.1666667, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 3, "pred_hat" -> 1.8794125273, 
+        "yearmonth" -> 2002.25, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 4, "pred_hat" -> 8.4046121268, 
+        "yearmonth" -> 2002.3333333, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 5, "pred_hat" -> 6.4924618378, 
+        "yearmonth" -> 2002.4166667, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 6, "pred_hat" -> 5.3517533684, 
+        "yearmonth" -> 2002.5, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 7, "pred_hat" -> 5.1454361573, 
+        "yearmonth" -> 2002.5833333, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 8, "pred_hat" -> 0.6369745467, 
+        "yearmonth" -> 2002.6666667, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 9, "pred_hat" -> 0.0195040475, 
+        "yearmonth" -> 2002.75, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 10, "pred_hat" -> 0.0062259391, 
+        "yearmonth" -> 2002.8333333, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2002, "ref_month" -> 11, "pred_hat" -> 0.0407104793, 
+        "yearmonth" -> 2002.9166667, "theta_grav" -> 5.1772919049|>, <|
+       "ref_year" -> 2003, "ref_month" -> 0, "pred_hat" -> 0.0434775034, 
+        "yearmonth" -> 2003, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 1, "pred_hat" -> 0.023458342, 
+        "yearmonth" -> 2003.0833333, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 2, "pred_hat" -> 0.049297393, 
+        "yearmonth" -> 2003.1666667, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 3, "pred_hat" -> 1.4585342337, 
+        "yearmonth" -> 2003.25, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 4, "pred_hat" -> 16.406727806, 
+        "yearmonth" -> 2003.3333333, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 5, "pred_hat" -> 9.3410332943, 
+        "yearmonth" -> 2003.4166667, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 6, "pred_hat" -> 3.9259053022, 
+        "yearmonth" -> 2003.5, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 7, "pred_hat" -> 4.5104575126, 
+        "yearmonth" -> 2003.5833333, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 8, "pred_hat" -> 0.9690310974, 
+        "yearmonth" -> 2003.6666667, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 9, "pred_hat" -> 0.023854774, 
+        "yearmonth" -> 2003.75, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 10, "pred_hat" -> 0.0034210267, 
+        "yearmonth" -> 2003.8333333, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2003, "ref_month" -> 11, "pred_hat" -> 0.0133088265, 
+        "yearmonth" -> 2003.9166667, "theta_grav" -> 4.9387703319|>, <|
+       "ref_year" -> 2004, "ref_month" -> 0, "pred_hat" -> 0.0030378272, 
+        "yearmonth" -> 2004, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 1, "pred_hat" -> 0.0030264, 
+        "yearmonth" -> 2004.0833333, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 2, "pred_hat" -> 0.0394706742, 
+        "yearmonth" -> 2004.1666667, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 3, "pred_hat" -> 1.742526473, 
+        "yearmonth" -> 2004.25, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 4, "pred_hat" -> 8.2474030384, 
+        "yearmonth" -> 2004.3333333, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 5, "pred_hat" -> 3.8779961916, 
+        "yearmonth" -> 2004.4166667, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 6, "pred_hat" -> 2.826974404, 
+        "yearmonth" -> 2004.5, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 7, "pred_hat" -> 3.8112169588, 
+        "yearmonth" -> 2004.5833333, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 8, "pred_hat" -> 0.9513839308, 
+        "yearmonth" -> 2004.6666667, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 9, "pred_hat" -> 0.0522379648, 
+        "yearmonth" -> 2004.75, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 10, "pred_hat" -> 0.0082175687, 
+        "yearmonth" -> 2004.8333333, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2004, "ref_month" -> 11, "pred_hat" -> 0.0053680041, 
+        "yearmonth" -> 2004.9166667, "theta_grav" -> 5.0682923969|>, <|
+       "ref_year" -> 2005, "ref_month" -> 0, "pred_hat" -> 0.0000393568, 
+        "yearmonth" -> 2005, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 1, "pred_hat" -> 0.0028448176, 
+        "yearmonth" -> 2005.0833333, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 2, "pred_hat" -> 0.0165512487, 
+        "yearmonth" -> 2005.1666667, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 3, "pred_hat" -> 0.911896974, 
+        "yearmonth" -> 2005.25, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 4, "pred_hat" -> 16.597979472, 
+        "yearmonth" -> 2005.3333333, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 5, "pred_hat" -> 11.548172799, 
+        "yearmonth" -> 2005.4166667, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 6, "pred_hat" -> 13.149440972, 
+        "yearmonth" -> 2005.5, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 7, "pred_hat" -> 7.8554258984, 
+        "yearmonth" -> 2005.5833333, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 8, "pred_hat" -> 0.0015323543, 
+        "yearmonth" -> 2005.6666667, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 9, "pred_hat" -> 7.309925*^-10, 
+        "yearmonth" -> 2005.75, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 10, "pred_hat" -> 9.300503*^-13, 
+        "yearmonth" -> 2005.8333333, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2005, "ref_month" -> 11, "pred_hat" -> 1.1778299*^-9, 
+        "yearmonth" -> 2005.9166667, "theta_grav" -> 5.2460015156|>, <|
+       "ref_year" -> 2006, "ref_month" -> 0, "pred_hat" -> 0.0000347033, 
+        "yearmonth" -> 2006, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 1, "pred_hat" -> 0.0002907211, 
+        "yearmonth" -> 2006.0833333, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 2, "pred_hat" -> 0.0147619813, 
+        "yearmonth" -> 2006.1666667, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 3, "pred_hat" -> 1.2129583725, 
+        "yearmonth" -> 2006.25, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 4, "pred_hat" -> 8.6440861763, 
+        "yearmonth" -> 2006.3333333, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 5, "pred_hat" -> 4.6073610513, 
+        "yearmonth" -> 2006.4166667, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 6, "pred_hat" -> 2.5301217698, 
+        "yearmonth" -> 2006.5, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 7, "pred_hat" -> 2.0972951039, 
+        "yearmonth" -> 2006.5833333, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 8, "pred_hat" -> 0.212445176, 
+        "yearmonth" -> 2006.6666667, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 9, "pred_hat" -> 0.0019150352, 
+        "yearmonth" -> 2006.75, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 10, "pred_hat" -> 0.0000386972, 
+        "yearmonth" -> 2006.8333333, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2006, "ref_month" -> 11, "pred_hat" -> 0.0000141153, 
+        "yearmonth" -> 2006.9166667, "theta_grav" -> 4.8146916555|>, <|
+       "ref_year" -> 2007, "ref_month" -> 0, "pred_hat" -> 0.0020403872, 
+        "yearmonth" -> 2007, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 1, "pred_hat" -> 0.0069871793, 
+        "yearmonth" -> 2007.0833333, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 2, "pred_hat" -> 0.0686034185, 
+        "yearmonth" -> 2007.1666667, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 3, "pred_hat" -> 0.7955276112, 
+        "yearmonth" -> 2007.25, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 4, "pred_hat" -> 6.0910243338, 
+        "yearmonth" -> 2007.3333333, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 5, "pred_hat" -> 10.52102624, 
+        "yearmonth" -> 2007.4166667, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 6, "pred_hat" -> 1.8647769232, 
+        "yearmonth" -> 2007.5, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 7, "pred_hat" -> 0.1159466206, 
+        "yearmonth" -> 2007.5833333, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 8, "pred_hat" -> 0.0225743076, 
+        "yearmonth" -> 2007.6666667, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 9, "pred_hat" -> 0.0174777147, 
+        "yearmonth" -> 2007.75, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 10, "pred_hat" -> 0.0107208461, 
+        "yearmonth" -> 2007.8333333, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2007, "ref_month" -> 11, "pred_hat" -> 0.0032468414, 
+        "yearmonth" -> 2007.9166667, "theta_grav" -> 4.6964369068|>, <|
+       "ref_year" -> 2008, "ref_month" -> 0, "pred_hat" -> 0.0000763749, 
+        "yearmonth" -> 2008, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 1, "pred_hat" -> 0.0011364303, 
+        "yearmonth" -> 2008.0833333, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 2, "pred_hat" -> 0.0306417802, 
+        "yearmonth" -> 2008.1666667, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 3, "pred_hat" -> 1.6449506239, 
+        "yearmonth" -> 2008.25, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 4, "pred_hat" -> 6.1062378375, 
+        "yearmonth" -> 2008.3333333, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 5, "pred_hat" -> 1.5062381179, 
+        "yearmonth" -> 2008.4166667, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 6, "pred_hat" -> 1.3228938434, 
+        "yearmonth" -> 2008.5, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 7, "pred_hat" -> 3.2149253811, 
+        "yearmonth" -> 2008.5833333, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 8, "pred_hat" -> 0.1275726307, 
+        "yearmonth" -> 2008.6666667, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 9, "pred_hat" -> 0.0000703135, 
+        "yearmonth" -> 2008.75, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 10, "pred_hat" -> 5.2381744*^-7, 
+        "yearmonth" -> 2008.8333333, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2008, "ref_month" -> 11, "pred_hat" -> 1.9847336*^-6, 
+        "yearmonth" -> 2008.9166667, "theta_grav" -> 5.0867563711|>, <|
+       "ref_year" -> 2009, "ref_month" -> 0, "pred_hat" -> 1.103058*^-22, 
+        "yearmonth" -> 2009, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 1, "pred_hat" -> 3.070701*^-13, 
+        "yearmonth" -> 2009.0833333, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 2, "pred_hat" -> 0.0001283126, 
+        "yearmonth" -> 2009.1666667, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 3, "pred_hat" -> 0.6598717492, 
+        "yearmonth" -> 2009.25, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 4, "pred_hat" -> 6.1319951269, 
+        "yearmonth" -> 2009.3333333, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 5, "pred_hat" -> 11.596655982, 
+        "yearmonth" -> 2009.4166667, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 6, "pred_hat" -> 8.0203092638, 
+        "yearmonth" -> 2009.5, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 7, "pred_hat" -> 9.8654140994, 
+        "yearmonth" -> 2009.5833333, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 8, "pred_hat" -> 2.7958093692, 
+        "yearmonth" -> 2009.6666667, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 9, "pred_hat" -> 0.0000188009, 
+        "yearmonth" -> 2009.75, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 10, "pred_hat" -> 5.908427*^-16, 
+        "yearmonth" -> 2009.8333333, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2009, "ref_month" -> 11, "pred_hat" -> 2.638256*^-24, 
+        "yearmonth" -> 2009.9166667, "theta_grav" -> 5.7254960725|>, <|
+       "ref_year" -> 2010, "ref_month" -> 0, "pred_hat" -> 6.626073*^-23, 
+        "yearmonth" -> 2010, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 1, "pred_hat" -> 5.353171*^-19, 
+        "yearmonth" -> 2010.0833333, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 2, "pred_hat" -> 1.2643401*^-8, 
+        "yearmonth" -> 2010.1666667, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 3, "pred_hat" -> 0.3674406527, 
+        "yearmonth" -> 2010.25, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 4, "pred_hat" -> 8.7574366276, 
+        "yearmonth" -> 2010.3333333, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 5, "pred_hat" -> 4.5099395639, 
+        "yearmonth" -> 2010.4166667, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 6, "pred_hat" -> 12.456753456, 
+        "yearmonth" -> 2010.5, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 7, "pred_hat" -> 2.0223880531, 
+        "yearmonth" -> 2010.5833333, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 8, "pred_hat" -> 0.0096841787, 
+        "yearmonth" -> 2010.6666667, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 9, "pred_hat" -> 0.0000287327, 
+        "yearmonth" -> 2010.75, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 10, "pred_hat" -> 9.19119*^-10, 
+        "yearmonth" -> 2010.8333333, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2010, "ref_month" -> 11, "pred_hat" -> 1.578072*^-17, 
+        "yearmonth" -> 2010.9166667, "theta_grav" -> 5.2399635082|>, <|
+       "ref_year" -> 2011, "ref_month" -> 0, "pred_hat" -> 2.842167*^-14, 
+        "yearmonth" -> 2011, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 1, "pred_hat" -> 1.441436*^-11, 
+        "yearmonth" -> 2011.0833333, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 2, "pred_hat" -> 0.0000989527, 
+        "yearmonth" -> 2011.1666667, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 3, "pred_hat" -> 3.9605117831, 
+        "yearmonth" -> 2011.25, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 4, "pred_hat" -> 10.10589396, 
+        "yearmonth" -> 2011.3333333, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 5, "pred_hat" -> 2.7043645398, 
+        "yearmonth" -> 2011.4166667, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 6, "pred_hat" -> 5.9019262235, 
+        "yearmonth" -> 2011.5, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 7, "pred_hat" -> 6.6601681135, 
+        "yearmonth" -> 2011.5833333, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 8, "pred_hat" -> 1.1139284933, 
+        "yearmonth" -> 2011.6666667, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 9, "pred_hat" -> 0.0558343241, 
+        "yearmonth" -> 2011.75, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 10, "pred_hat" -> 0.0000382332, 
+        "yearmonth" -> 2011.8333333, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2011, "ref_month" -> 11, "pred_hat" -> 1.244359*^-10, 
+        "yearmonth" -> 2011.9166667, "theta_grav" -> 5.1545599852|>, <|
+       "ref_year" -> 2012, "ref_month" -> 0, "pred_hat" -> 0.0001246656, 
+        "yearmonth" -> 2012, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 1, "pred_hat" -> 0.0002403777, 
+        "yearmonth" -> 2012.0833333, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 2, "pred_hat" -> 0.0155406165, 
+        "yearmonth" -> 2012.1666667, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 3, "pred_hat" -> 2.1601155293, 
+        "yearmonth" -> 2012.25, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 4, "pred_hat" -> 14.99878971, 
+        "yearmonth" -> 2012.3333333, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 5, "pred_hat" -> 7.0745178568, 
+        "yearmonth" -> 2012.4166667, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 6, "pred_hat" -> 3.9356036894, 
+        "yearmonth" -> 2012.5, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 7, "pred_hat" -> 3.6528162182, 
+        "yearmonth" -> 2012.5833333, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 8, "pred_hat" -> 0.9076476171, 
+        "yearmonth" -> 2012.6666667, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 9, "pred_hat" -> 0.0586149087, 
+        "yearmonth" -> 2012.75, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 10, "pred_hat" -> 0.0047169897, 
+        "yearmonth" -> 2012.8333333, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2012, "ref_month" -> 11, "pred_hat" -> 0.0006225308, 
+        "yearmonth" -> 2012.9166667, "theta_grav" -> 4.8589197448|>, <|
+       "ref_year" -> 2013, "ref_month" -> 0, "pred_hat" -> 5.2450818*^-7, 
+        "yearmonth" -> 2013, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 1, "pred_hat" -> 0.0001844308, 
+        "yearmonth" -> 2013.0833333, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 2, "pred_hat" -> 0.0785923347, 
+        "yearmonth" -> 2013.1666667, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 3, "pred_hat" -> 2.8583798647, 
+        "yearmonth" -> 2013.25, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 4, "pred_hat" -> 12.005876214, 
+        "yearmonth" -> 2013.3333333, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 5, "pred_hat" -> 12.983143648, 
+        "yearmonth" -> 2013.4166667, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 6, "pred_hat" -> 7.0127695212, 
+        "yearmonth" -> 2013.5, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 7, "pred_hat" -> 4.0961432467, 
+        "yearmonth" -> 2013.5833333, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 8, "pred_hat" -> 1.2911962418, 
+        "yearmonth" -> 2013.6666667, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 9, "pred_hat" -> 0.0232193203, 
+        "yearmonth" -> 2013.75, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 10, "pred_hat" -> 0.0000269159, 
+        "yearmonth" -> 2013.8333333, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2013, "ref_month" -> 11, "pred_hat" -> 1.8529298*^-7, 
+        "yearmonth" -> 2013.9166667, "theta_grav" -> 5.0204176655|>, <|
+       "ref_year" -> 2014, "ref_month" -> 0, "pred_hat" -> 5.7562598*^-8, 
+        "yearmonth" -> 2014, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 1, "pred_hat" -> 6.8204496*^-7, 
+        "yearmonth" -> 2014.0833333, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 2, "pred_hat" -> 0.0006512326, 
+        "yearmonth" -> 2014.1666667, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 3, "pred_hat" -> 0.4230226266, 
+        "yearmonth" -> 2014.25, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 4, "pred_hat" -> 10.357576712, 
+        "yearmonth" -> 2014.3333333, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 5, "pred_hat" -> 17.000029347, 
+        "yearmonth" -> 2014.4166667, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 6, "pred_hat" -> 10.130297958, 
+        "yearmonth" -> 2014.5, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 7, "pred_hat" -> 5.2514415573, 
+        "yearmonth" -> 2014.5833333, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 8, "pred_hat" -> 2.0531789155, 
+        "yearmonth" -> 2014.6666667, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 9, "pred_hat" -> 0.1921063512, 
+        "yearmonth" -> 2014.75, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 10, "pred_hat" -> 0.0012773744, 
+        "yearmonth" -> 2014.8333333, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2014, "ref_month" -> 11, "pred_hat" -> 2.0847566*^-6, 
+        "yearmonth" -> 2014.9166667, "theta_grav" -> 5.4248435159|>, <|
+       "ref_year" -> 2015, "ref_month" -> 0, "pred_hat" -> 2.7492471*^-6, 
+        "yearmonth" -> 2015, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 1, "pred_hat" -> 0.0001098684, 
+        "yearmonth" -> 2015.0833333, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 2, "pred_hat" -> 0.0007877469, 
+        "yearmonth" -> 2015.1666667, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 3, "pred_hat" -> 0.0632479734, 
+        "yearmonth" -> 2015.25, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 4, "pred_hat" -> 13.482526302, 
+        "yearmonth" -> 2015.3333333, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 5, "pred_hat" -> 47.464632857, 
+        "yearmonth" -> 2015.4166667, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 6, "pred_hat" -> 11.32878225, 
+        "yearmonth" -> 2015.5, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 7, "pred_hat" -> 16.401876411, 
+        "yearmonth" -> 2015.5833333, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 8, "pred_hat" -> 8.1907555224, 
+        "yearmonth" -> 2015.6666667, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 9, "pred_hat" -> 0.0063130538, 
+        "yearmonth" -> 2015.75, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 10, "pred_hat" -> 5.1185352*^-7, 
+        "yearmonth" -> 2015.8333333, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2015, "ref_month" -> 11, "pred_hat" -> 4.060713*^-8, 
+        "yearmonth" -> 2015.9166667, "theta_grav" -> 5.6078602177|>, <|
+       "ref_year" -> 2016, "ref_month" -> 0, "pred_hat" -> 6.2738131*^-6, 
+        "yearmonth" -> 2016, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 1, "pred_hat" -> 0.0000189203, 
+        "yearmonth" -> 2016.0833333, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 2, "pred_hat" -> 0.0008379964, 
+        "yearmonth" -> 2016.1666667, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 3, "pred_hat" -> 0.2044078356, 
+        "yearmonth" -> 2016.25, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 4, "pred_hat" -> 12.48976491, 
+        "yearmonth" -> 2016.3333333, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 5, "pred_hat" -> 20.878349563, 
+        "yearmonth" -> 2016.4166667, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 6, "pred_hat" -> 4.9078061142, 
+        "yearmonth" -> 2016.5, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 7, "pred_hat" -> 2.5005058961, 
+        "yearmonth" -> 2016.5833333, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 8, "pred_hat" -> 1.6474953607, 
+        "yearmonth" -> 2016.6666667, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 9, "pred_hat" -> 0.1282747392, 
+        "yearmonth" -> 2016.75, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 10, "pred_hat" -> 0.0013663026, 
+        "yearmonth" -> 2016.8333333, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2016, "ref_month" -> 11, "pred_hat" -> 0.0000280088, 
+        "yearmonth" -> 2016.9166667, "theta_grav" -> 5.0744465672|>, <|
+       "ref_year" -> 2017, "ref_month" -> 0, "pred_hat" -> 2.07022*^-19, 
+        "yearmonth" -> 2017, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 1, "pred_hat" -> 1.497452*^-13, 
+        "yearmonth" -> 2017.0833333, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 2, "pred_hat" -> 5.4979797*^-6, 
+        "yearmonth" -> 2017.1666667, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 3, "pred_hat" -> 0.1670540439, 
+        "yearmonth" -> 2017.25, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 4, "pred_hat" -> 6.4769140612, 
+        "yearmonth" -> 2017.3333333, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 5, "pred_hat" -> 15.321822929, 
+        "yearmonth" -> 2017.4166667, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 6, "pred_hat" -> 8.5300825896, 
+        "yearmonth" -> 2017.5, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 7, "pred_hat" -> 5.5256306789, 
+        "yearmonth" -> 2017.5833333, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 8, "pred_hat" -> 4.3566993524, 
+        "yearmonth" -> 2017.6666667, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 9, "pred_hat" -> 0.0088585924, 
+        "yearmonth" -> 2017.75, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 10, "pred_hat" -> 4.876279*^-10, 
+        "yearmonth" -> 2017.8333333, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2017, "ref_month" -> 11, "pred_hat" -> 7.120659*^-18, 
+        "yearmonth" -> 2017.9166667, "theta_grav" -> 5.6318658916|>, <|
+       "ref_year" -> 2018, "ref_month" -> 0, "pred_hat" -> 0.0001173088, 
+        "yearmonth" -> 2018, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 1, "pred_hat" -> 0.0000124966, 
+        "yearmonth" -> 2018.0833333, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 2, "pred_hat" -> 0.0000138809, 
+        "yearmonth" -> 2018.1666667, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 3, "pred_hat" -> 0.0086406876, 
+        "yearmonth" -> 2018.25, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 4, "pred_hat" -> 6.9630469355, 
+        "yearmonth" -> 2018.3333333, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 5, "pred_hat" -> 20.559975289, 
+        "yearmonth" -> 2018.4166667, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 6, "pred_hat" -> 4.6366634485, 
+        "yearmonth" -> 2018.5, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 7, "pred_hat" -> 2.6867353968, 
+        "yearmonth" -> 2018.5833333, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 8, "pred_hat" -> 0.1767876483, 
+        "yearmonth" -> 2018.6666667, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 9, "pred_hat" -> 0.0003362745, 
+        "yearmonth" -> 2018.75, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 10, "pred_hat" -> 6.7602365*^-6, 
+        "yearmonth" -> 2018.8333333, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2018, "ref_month" -> 11, "pred_hat" -> 0.0000313246, 
+        "yearmonth" -> 2018.9166667, "theta_grav" -> 5.1017577502|>, <|
+       "ref_year" -> 2019, "ref_month" -> 0, "pred_hat" -> 1.235674*^-37, 
+        "yearmonth" -> 2019, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 1, "pred_hat" -> 5.197202*^-27, 
+        "yearmonth" -> 2019.0833333, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 2, "pred_hat" -> 1.184929*^-11, 
+        "yearmonth" -> 2019.1666667, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 3, "pred_hat" -> 0.0228997889, 
+        "yearmonth" -> 2019.25, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 4, "pred_hat" -> 9.0653376403, 
+        "yearmonth" -> 2019.3333333, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 5, "pred_hat" -> 13.300187988, 
+        "yearmonth" -> 2019.4166667, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 6, "pred_hat" -> 6.7649181622, 
+        "yearmonth" -> 2019.5, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 7, "pred_hat" -> 6.6981091559, 
+        "yearmonth" -> 2019.5833333, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 8, "pred_hat" -> 6.8177914948, 
+        "yearmonth" -> 2019.6666667, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 9, "pred_hat" -> 0.000196591, 
+        "yearmonth" -> 2019.75, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 10, "pred_hat" -> 1.192493*^-17, 
+        "yearmonth" -> 2019.8333333, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2019, "ref_month" -> 11, "pred_hat" -> 3.502415*^-33, 
+        "yearmonth" -> 2019.9166667, "theta_grav" -> 5.777043252|>, <|
+       "ref_year" -> 2020, "ref_month" -> 0, "pred_hat" -> 8.614028*^-33, 
+        "yearmonth" -> 2020, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 1, "pred_hat" -> 9.441996*^-19, 
+        "yearmonth" -> 2020.0833333, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 2, "pred_hat" -> 7.6574946*^-8, 
+        "yearmonth" -> 2020.1666667, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 3, "pred_hat" -> 0.0653724955, 
+        "yearmonth" -> 2020.25, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 4, "pred_hat" -> 6.4954991961, 
+        "yearmonth" -> 2020.3333333, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 5, "pred_hat" -> 5.1704953, 
+        "yearmonth" -> 2020.4166667, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 6, "pred_hat" -> 10.347123131, 
+        "yearmonth" -> 2020.5, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 7, "pred_hat" -> 8.25466842, 
+        "yearmonth" -> 2020.5833333, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 8, "pred_hat" -> 3.3590488*^-6, 
+        "yearmonth" -> 2020.6666667, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 9, "pred_hat" -> 1.484944*^-21, 
+        "yearmonth" -> 2020.75, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 10, "pred_hat" -> 1.709051*^-37, 
+        "yearmonth" -> 2020.8333333, "theta_grav" -> 5.6597331522|>, <|
+       "ref_year" -> 2020, "ref_month" -> 11, "pred_hat" -> 6.505725*^-42, 
+        "yearmonth" -> 2020.9166667, "theta_grav" -> 5.6597331522|>}, 
+     "AllowEmbedding" -> True, "InitialShape" -> 
+     TypeSystem`PackageScope`HeaderShape[<|{All, "ref_year"} -> 
+        1, {All, "ref_month"} -> 1, {All, "pred_hat"} -> 
+        1, {All, "yearmonth"} -> 1, {All, "theta_grav"} -> 1|>, 
+       TypeSystem`PackageScope`Limited[
+        TypeSystem`PackageScope`ColumnShape[
+         TypeSystem`PackageScope`Limited[
+          
+          TypeSystem`PackageScope`RowShape[<|
+           "ref_year" -> TypeSystem`PackageScope`AtomShape[34], "ref_month" -> 
+            TypeSystem`PackageScope`AtomShape[34], "pred_hat" -> 
+            TypeSystem`PackageScope`AtomShape[60], "yearmonth" -> 
+            TypeSystem`PackageScope`AtomShape[60], "theta_grav" -> 
+            TypeSystem`PackageScope`AtomShape[60]|>], 
+          DirectedInfinity[1], 5, {All}]], 20, 
+        DirectedInfinity[1], {}]], "InitialType" -> TypeSystem`Vector[
+       TypeSystem`Struct[{
+        "ref_year", "ref_month", "pred_hat", "yearmonth", "theta_grav"}, {
+         TypeSystem`Atom[Integer], 
+         TypeSystem`Atom[Integer], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real]}], 264], "Meta" -> <||>, "RowTarget" -> 20, 
+     "ColumnTarget" -> 10, "Shape" -> 
+     TypeSystem`PackageScope`HeaderShape[<|{All, "ref_year"} -> 
+        1, {All, "ref_month"} -> 1, {All, "pred_hat"} -> 
+        1, {All, "yearmonth"} -> 1, {All, "theta_grav"} -> 1|>, 
+       TypeSystem`PackageScope`Limited[
+        TypeSystem`PackageScope`ColumnShape[
+         TypeSystem`PackageScope`Limited[
+          
+          TypeSystem`PackageScope`RowShape[<|
+           "ref_year" -> TypeSystem`PackageScope`AtomShape[34], "ref_month" -> 
+            TypeSystem`PackageScope`AtomShape[34], "pred_hat" -> 
+            TypeSystem`PackageScope`AtomShape[60], "yearmonth" -> 
+            TypeSystem`PackageScope`AtomShape[60], "theta_grav" -> 
+            TypeSystem`PackageScope`AtomShape[60]|>], 
+          DirectedInfinity[1], 5, {All}]], 20, 
+        DirectedInfinity[1], {}]], "Type" -> TypeSystem`Vector[
+       TypeSystem`Struct[{
+        "ref_year", "ref_month", "pred_hat", "yearmonth", "theta_grav"}, {
+         TypeSystem`Atom[Integer], 
+         TypeSystem`Atom[Integer], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real], 
+         TypeSystem`Atom[Real]}], 264], "Path" -> {}, "DisplayedRowCount" -> 
+     20, "DisplayedColumnCount" -> 5, "DataRowCount" -> 264, 
+     "DataColumnCount" -> 5, "SortPaths" -> {}, "SortDirections" -> {}, 
+     "HiddenItemsMap" -> Null, "UpdateType" -> 1|>, 
+    TypeSystem`NestedGrid`PackagePrivate`$outputID$$, 
+    TypeSystem`NestedGrid`PackagePrivate`$path$$ = {}, 
+    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 1, 
+    TypeSystem`NestedGrid`PackagePrivate`$hPos$$ = 1, 
+    TypeSystem`NestedGrid`PackagePrivate`$grid$$ = 
+    DynamicModule[{TypeSystem`NestedGrid`PackagePrivate`renderedGrid = Deploy[
+        Style[
+         Grid[{{
+            Item[
+             Pane[
+              Annotation[
+               EventHandler[
+                MouseAppearance[
+                 Mouseover["ref_year", 
+                  Style[
+                  "ref_year", FontColor -> 
+                   RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                If[
+                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                  TypeSystem`NestedGrid`PackagePrivate`updateState[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                   All, "ref_year"}, 1]]], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                All, "ref_year"}, "ColumnHeader", True], "Mouse"], 
+              ImageSize -> {{1, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+            Item[
+             Pane[
+              Annotation[
+               EventHandler[
+                MouseAppearance[
+                 Mouseover["ref_month", 
+                  Style[
+                  "ref_month", FontColor -> 
+                   RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                If[
+                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                  TypeSystem`NestedGrid`PackagePrivate`updateState[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                   All, "ref_month"}, 1]]], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                All, "ref_month"}, "ColumnHeader", True], "Mouse"], 
+              ImageSize -> {{1, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+            Item[
+             Pane[
+              Annotation[
+               EventHandler[
+                MouseAppearance[
+                 Mouseover["pred_hat", 
+                  Style[
+                  "pred_hat", FontColor -> 
+                   RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                If[
+                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                  TypeSystem`NestedGrid`PackagePrivate`updateState[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                   All, "pred_hat"}, 1]]], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                All, "pred_hat"}, "ColumnHeader", True], "Mouse"], 
+              ImageSize -> {{1, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+            Item[
+             Pane[
+              Annotation[
+               EventHandler[
+                MouseAppearance[
+                 Mouseover["yearmonth", 
+                  Style[
+                  "yearmonth", FontColor -> 
+                   RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                If[
+                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                  TypeSystem`NestedGrid`PackagePrivate`updateState[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                   All, "yearmonth"}, 1]]], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                All, "yearmonth"}, "ColumnHeader", True], "Mouse"], 
+              ImageSize -> {{1, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+             GrayLevel[0.95], Alignment -> {Left, Baseline}], 
+            Item[
+             Pane[
+              Annotation[
+               EventHandler[
+                MouseAppearance[
+                 Mouseover["theta_grav", 
+                  Style[
+                  "theta_grav", FontColor -> 
+                   RGBColor[
+                    0.27450980392156865`, 0.5372549019607843, 
+                    0.792156862745098]]], "LinkHand"], {"MouseClicked", 1} :> 
+                If[
+                  TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                  TypeSystem`NestedGrid`PackagePrivate`updateState[
+                  TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                   TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][{
+                   All, "theta_grav"}, 1]]], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{
+                All, "theta_grav"}, "ColumnHeader", True], "Mouse"], 
+              ImageSize -> {{1, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], Background -> 
+             GrayLevel[0.95], Alignment -> {Left, Baseline}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.332095"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{1, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.167268"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.08"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{2, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.165832"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.17"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{3, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["3"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1.71562"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.25"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{4, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["12.8949"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.33"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{5, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["12.0644"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.42"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{6, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["6"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["7.19774"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.5"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{7, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["7"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.50291"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.58"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{8, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{9, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["8"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{9, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.42781"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{9, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.67"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{9, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{9, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{10, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["9"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{10, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.0123613"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{10, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.75"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{10, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{10, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{11, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["10"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{11, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.00521938"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{11, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.83"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{11, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{11, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{12, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["11"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{12, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.059227"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{12, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1999.92"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{12, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4.96909"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{12, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{13, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{13, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.180644"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{13, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{13, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{13, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{14, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{14, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.201854"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{14, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.08"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{14, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{14, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{15, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{15, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["0.19096"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{15, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.17"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{15, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{15, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{16, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["3"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{16, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["1.2273"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{16, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.25"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{16, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{16, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{17, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["4"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{17, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["11.9411"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{17, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.33"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{17, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{17, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{18, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{18, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["17.6876"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{18, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.42"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{18, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{18, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{19, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["6"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{19, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["9.00462"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{19, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.5"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{19, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{19, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{20, 
+                 Key["ref_year"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["7"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{20, 
+                 Key["ref_month"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{34, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["6.4194"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{20, 
+                 Key["pred_hat"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["2000.58"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{20, 
+                 Key["yearmonth"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}], 
+            Item[
+             Pane[
+              Annotation[
+               RawBoxes["5.25025"], 
+               TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][{20, 
+                 Key["theta_grav"]}, "Item", False], "Mouse"], 
+              ImageSize -> {{60, Full}, Automatic}, 
+              ImageMargins -> {{5, 3}, {4, 5}}], 
+             ItemSize -> {Full, Automatic}]}, {
+            Item[
+             Deploy[
+              Pane[
+               Row[{
+                 Spacer[2], 
+                 Style[
+                  Row[{
+                    Button[
+                    MouseAppearance[
+                    Mouseover[
+                    Graphics[{{
+                    EdgeForm[None], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
+                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 0, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
+                    RGBColor[
+                    0.5372549019607843, 0.5372549019607843, 
+                    0.5372549019607843]], 
+                    Graphics[{{
+                    EdgeForm[
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549]], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
+                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 0, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
+                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ - 20 
+                    If[True, 264, 1], {1, 264 - -20 + 1}]; 
+                    TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
+                    Appearance -> None], 
+                    Button[
+                    MouseAppearance[
+                    Mouseover[
+                    Graphics[{{
+                    EdgeForm[None], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 0, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
+                    RGBColor[
+                    0.5372549019607843, 0.5372549019607843, 
+                    0.5372549019607843]], 
+                    Graphics[{{
+                    EdgeForm[
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549]], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 0, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
+                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ - 20 
+                    If[False, 264, 1], {1, 264 - -20 + 1}]; 
+                    TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
+                    Appearance -> None], " ", 
+                    Style[
+                    Mouseover[
+                    Style[
+                    Row[{"rows ", 1, "\[Dash]", 20, " of ", 
+                    Style[264, FontWeight -> Bold]}], FontSize -> 
+                    9.333333333333332, FontColor -> 
+                    RGBColor[
+                    0.5098039215686274, 0.5098039215686274, 
+                    0.5098039215686274]], 
+                    Style[
+                    Row[{"rows ", 1, "\[Dash]", 20, " of ", 
+                    Style[264, FontWeight -> Bold]}], FontSize -> 
+                    9.333333333333332, FontColor -> 
+                    RGBColor[
+                    0.5098039215686274, 0.5098039215686274, 
+                    0.5098039215686274]]], ContextMenu -> {
+                    MenuItem["Hide", 
+                    KernelExecute[
+                    
+                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
+                    "Rows", 1, {}]], MenuEvaluator -> Automatic], 
+                    MenuItem["Show up to 10 Rows", 
+                    KernelExecute[
+                    
+                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
+                    "Rows", 10, {}]], MenuEvaluator -> Automatic], 
+                    MenuItem["Show up to 30 Rows", 
+                    KernelExecute[
+                    
+                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
+                    "Rows", 30, {}]], MenuEvaluator -> Automatic], 
+                    MenuItem["Show up to 100 Rows", 
+                    KernelExecute[
+                    
+                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
+                    "Rows", 100, {}]], MenuEvaluator -> Automatic], 
+                    MenuItem["Show All", 
+                    KernelExecute[
+                    
+                    TypeSystem`NestedGrid`PackagePrivate`adjustLimits[{
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]}, 
+                    "Rows", 100000000, {}]], MenuEvaluator -> Automatic]}], 
+                    " ", 
+                    Button[
+                    MouseAppearance[
+                    Mouseover[
+                    Graphics[{{
+                    EdgeForm[None], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 180 Degree, {
+                    9, 9}]}, ImageSize -> (1 -> 1), 
+                    ImagePadding -> {{0, 1}, {1, 0}}, BaselinePosition -> 
+                    Scaled[0.35], BaseStyle -> 
+                    RGBColor[
+                    0.5372549019607843, 0.5372549019607843, 
+                    0.5372549019607843]], 
+                    Graphics[{{
+                    EdgeForm[
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549]], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}]}, {5, 6.5}], 180 Degree, {
+                    9, 9}]}, ImageSize -> (1 -> 1), 
+                    ImagePadding -> {{0, 1}, {1, 0}}, BaselinePosition -> 
+                    Scaled[0.35]]], "LinkHand"], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
+                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + 
+                    20 If[False, 264, 1], {1, 264 - 20 + 1}]; 
+                    TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
+                    Appearance -> None], 
+                    Button[
+                    MouseAppearance[
+                    Mouseover[
+                    Graphics[{{
+                    EdgeForm[None], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
+                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 180 Degree, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35], BaseStyle -> 
+                    RGBColor[
+                    0.5372549019607843, 0.5372549019607843, 
+                    0.5372549019607843]], 
+                    Graphics[{{
+                    EdgeForm[
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549]], 
+                    FaceForm[None], 
+                    Rectangle[{0, 0}, {18, 18}, RoundingRadius -> 2]}, 
+                    Rotate[
+                    Translate[{
+                    CapForm[Round], 
+                    RGBColor[
+                    0.27450980392156865`, 0.5411764705882353, 
+                    0.796078431372549], 
+                    Line[{{0, 0}, {4, 5}, {8, 0}}], 
+                    Line[{{0, 5}, {8, 5}}]}, {5, 6.5}], 180 Degree, {9, 9}]}, 
+                    ImageSize -> (1 -> 1), ImagePadding -> {{0, 1}, {1, 0}}, 
+                    BaselinePosition -> Scaled[0.35]]], "LinkHand"], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`checkInteractivity[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$ = 
+                    Clip[TypeSystem`NestedGrid`PackagePrivate`$vPos$$ + 
+                    20 If[True, 264, 1], {1, 264 - 20 + 1}]; 
+                    TypeSystem`NestedGrid`PackagePrivate`updateState[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]], True][
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$]], 
+                    Appearance -> None]}], ContextMenu -> {}]}], 
+               ImageMargins -> {{0, -1}, {-1, 1}}]], Background -> 
+             RGBColor[
+              0.9764705882352941, 0.9764705882352941, 0.9764705882352941], 
+             Alignment -> {Left, Top}], SpanFromLeft, SpanFromLeft, 
+            SpanFromLeft, SpanFromLeft}}, 
+          BaseStyle -> {
+           ContextMenu -> 
+            Dynamic[TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger; 
+              Which[TypeSystem`NestedGrid`PackagePrivate`$lastOutputID =!= 
+                TypeSystem`NestedGrid`PackagePrivate`localHold[
+                 TypeSystem`NestedGrid`PackagePrivate`$outputID$$], {}, 
+                TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger === 
+                TypeSystem`NestedGrid`PackagePrivate`$lastContextMenuTrigger, 
+                TypeSystem`NestedGrid`PackagePrivate`$lastContextMenu, True, 
+                TypeSystem`NestedGrid`PackagePrivate`$lastContextMenuTrigger = 
+                 TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger; 
+                TypeSystem`NestedGrid`PackagePrivate`$lastContextMenu = 
+                 Block[{TypeSystem`NestedGrid`PackagePrivate`$globalScrollPos = \
+{TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$}}, 
+                   
+                   With[{TypeSystem`NestedGrid`PackagePrivate`lastPath$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPathType, 
+                    TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`$\
+lastPathIsLeafHeader, TypeSystem`NestedGrid`PackagePrivate`headerHidden$ = And[
+                    MatchQ[TypeSystem`NestedGrid`PackagePrivate`$lastPathType, 
+                    Alternatives["RowHeader", "ColumnHeader"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`headerHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$]], 
+                    TypeSystem`NestedGrid`PackagePrivate`allHidden$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`allHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`anyHidden$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`anyHiddenQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ = 
+                    TypeSystem`NestedGrid`PackagePrivate`columnSortDirection[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$[
+                    "SortPaths"], 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$[
+                    "SortDirections"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`haveData$ = Not[
+                    FailureQ[
+                    TypeSystem`NestedGrid`PackagePrivate`datasetInitialData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$]]], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$ = Not[
+                    FreeQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, Keys]]}, 
+                    Join[{
+                    If[
+                    Or[
+                    Not[TypeSystem`NestedGrid`PackagePrivate`haveData$], 
+                    Not[TypeSystem`NestedGrid`PackagePrivate`anyHidden$], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$], 
+                    Nothing, 
+                    MenuItem[
+                    "Show " <> 
+                    Which[TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "Item", "", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "RowHeader", "Row", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "ColumnHeader", "Column", True, ""], 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateHiddenItems[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "remove"]], MenuEvaluator -> Automatic]], 
+                    If[
+                    Or[
+                    Not[TypeSystem`NestedGrid`PackagePrivate`haveData$], 
+                    TypeSystem`NestedGrid`PackagePrivate`pathEmptyQ[
+                    TypeSystem`NestedGrid`PackagePrivate`$lastPath, 
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$], 
+                    TypeSystem`NestedGrid`PackagePrivate`isKeyDummy$, 
+                    And[
+                    TypeSystem`NestedGrid`PackagePrivate`allHidden$, 
+                    TypeSystem`NestedGrid`PackagePrivate`headerHidden$]], 
+                    Nothing, 
+                    MenuItem[
+                    "Hide " <> 
+                    Which[TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "Item", "", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "RowHeader", "Row", 
+                    TypeSystem`NestedGrid`PackagePrivate`lastPathType$ == 
+                    "ColumnHeader", "Column", True, ""], 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateHiddenItems[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, "add"]], 
+                    MenuEvaluator -> Automatic]], Delimiter}, 
+                    If[
+                    And[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MatchQ[TypeSystem`NestedGrid`PackagePrivate`lastPathType$, 
+                    Alternatives["ColumnHeader", "KeyDummy"]], 
+                    TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$, 
+                    Not[TypeSystem`NestedGrid`PackagePrivate`allHidden$]], {
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    "Ascending", 
+                    MenuItem["Sort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "Ascending"]], MenuEvaluator -> Automatic], Nothing], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    "Descending", 
+                    MenuItem["Reverse Sort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, 
+                    "Descending"]], MenuEvaluator -> Automatic], Nothing], 
+                    If[
+                    TypeSystem`NestedGrid`PackagePrivate`sortDirection$ =!= 
+                    None, 
+                    MenuItem["Unsort", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`updateSort[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`localHold[
+                    TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+                    TypeSystem`NestedGrid`PackagePrivate`lastPath$, None]], 
+                    MenuEvaluator -> Automatic], Nothing], Delimiter}, {}], {
+                    MenuItem["Copy Position to Clipboard", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                    MenuEvaluator -> Automatic], 
+                    If[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MenuItem["Copy Data to Clipboard", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`copyClip]], 
+                    MenuEvaluator -> Automatic], Nothing], Delimiter, 
+                    MenuItem["Paste Position in New Cell", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentPosition[
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                    MenuEvaluator -> Automatic], 
+                    If[TypeSystem`NestedGrid`PackagePrivate`haveData$, 
+                    MenuItem["Paste Data in New Cell", 
+                    KernelExecute[
+                    TypeSystem`NestedGrid`PackagePrivate`toCurrentData[
+                    TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+                    TypeSystem`NestedGrid`PackagePrivate`cellPaste]], 
+                    MenuEvaluator -> Automatic], Nothing]}]]]]], FontFamily -> 
+            "Source Sans Pro", FontSize -> 14, FontWeight -> Plain}, Dividers -> 
+          All, FrameStyle -> GrayLevel[0.7490196078431373], 
+          Spacings -> {0, 0}, Alignment -> Left, 
+          BaseStyle -> {
+           FontFamily -> "Source Sans Pro", FontSize -> 14, FontWeight -> 
+            Plain}], LineBreakWithin -> False, ContextMenu -> {}, NumberMarks -> 
+         False, ShowAutoStyles -> False]], 
+      TypeSystem`NestedGrid`PackagePrivate`initialQ = True}, 
+     Dynamic[
+      TypeSystem`NestedGrid`PackagePrivate`setupViewPath[
+      TypeSystem`NestedGrid`PackagePrivate`$path$$, If[
+         Not[TypeSystem`NestedGrid`PackagePrivate`initialQ], 
+         Module[{
+          TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = $Failed, 
+           TypeSystem`NestedGrid`PackagePrivate`tmpData$ = 
+           TypeSystem`NestedGrid`PackagePrivate`datasetData[
+            TypeSystem`NestedGrid`PackagePrivate`$state$$]}, 
+          TypeSystem`NestedGrid`PackagePrivate`tmpGrid$ = If[
+             FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpData$], 
+             TypeSystem`NestedGrid`PackagePrivate`renderedGrid, 
+             TypeSystem`NestedGrid`PackagePrivate`renderGrid[
+             TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+              TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+              TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+              TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+              TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+              TypeSystem`NestedGrid`PackagePrivate`localHold[
+              TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+             TypeSystem`NestedGrid`PackagePrivate`tmpData$]]; If[
+            Not[
+             FailureQ[TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]], 
+            TypeSystem`NestedGrid`PackagePrivate`renderedGrid = 
+            TypeSystem`NestedGrid`PackagePrivate`tmpGrid$]; Null]]; 
+       TypeSystem`NestedGrid`PackagePrivate`initialQ = False; 
+       TypeSystem`NestedGrid`PackagePrivate`$vPos$$; 
+       TypeSystem`NestedGrid`PackagePrivate`$hPos$$; If[
+         FailureQ[TypeSystem`NestedGrid`PackagePrivate`renderedGrid], 
+         TypeSystem`SparseGrid[
+          TypeSystem`H["(data no longer present)"]], 
+         TypeSystem`NestedGrid`PackagePrivate`renderedGrid]], 
+      TrackedSymbols :> {
+       TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$hPos$$}], 
+     DynamicModuleValues :> {}], 
+    TypeSystem`NestedGrid`PackagePrivate`$topBar$$ = Dynamic[
+     TypeSystem`NestedGrid`PackagePrivate`makeFramedBar[
+      TypeSystem`PackageScope`SubViewPathbar[
+      TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+       TypeSystem`NestedGrid`PackagePrivate`updateState[
+       TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$path$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$vPos$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$hPos$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$grid$$, 
+        TypeSystem`NestedGrid`PackagePrivate`localHold[
+        TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]]], 
+     TrackedSymbols :> {TypeSystem`NestedGrid`PackagePrivate`$path$$}], 
+    TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$ = Style[
+     Framed[
+      Dynamic[
+       Replace[
+       TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$, {
+        TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+           TypeSystem`NestedGrid`PackagePrivate`localHold[
+           TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][Null, 
+           Blank[]] -> "", TypeSystem`NestedGrid`PackagePrivate`$SliceMarker[
+           TypeSystem`NestedGrid`PackagePrivate`localHold[
+           TypeSystem`NestedGrid`PackagePrivate`$outputID$$]][
+           Pattern[TypeSystem`NestedGrid`PackagePrivate`path$, 
+            Blank[]], 
+           Pattern[TypeSystem`NestedGrid`PackagePrivate`pathType$, 
+            Blank[]], 
+           Pattern[TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$, 
+            Blank[]]] :> (
+          Increment[TypeSystem`NestedGrid`PackagePrivate`$contextMenuTrigger]; 
+          TypeSystem`NestedGrid`PackagePrivate`$lastPath = 
+           TypeSystem`NestedGrid`PackagePrivate`path$; 
+          TypeSystem`NestedGrid`PackagePrivate`$lastPathType = 
+           TypeSystem`NestedGrid`PackagePrivate`pathType$; 
+          TypeSystem`NestedGrid`PackagePrivate`$lastPathIsLeafHeader = 
+           TypeSystem`NestedGrid`PackagePrivate`isLeafHeader$; 
+          TypeSystem`NestedGrid`PackagePrivate`$lastOutputID = 
+           TypeSystem`NestedGrid`PackagePrivate`localHold[
+            TypeSystem`NestedGrid`PackagePrivate`$outputID$$]; 
+          TypeSystem`NestedGrid`PackagePrivate`makePathTrail[
+           TypeSystem`NestedGrid`PackagePrivate`path$, 
+            TypeSystem`NestedGrid`PackagePrivate`makePathElements]), Null :> 
+         Spacer[10], Blank[] :> Spacer[10]}], 
+       TrackedSymbols :> {
+        TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$}], FrameStyle -> 
+      None, ImageMargins -> 0, FrameMargins -> 0, Alignment -> Top, 
+      ImageSize -> {Automatic, 15}], FontSize -> 1], 
+    TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$ = Null}, 
+    DynamicWrapperBox[
+     DynamicBox[ToBoxes[
+       Dataset`DatasetContent[
+       2, "Path" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$path$$], 
+        "Grid" -> Hold[TypeSystem`NestedGrid`PackagePrivate`$grid$$], "State" -> 
+        Hold[TypeSystem`NestedGrid`PackagePrivate`$state$$], "VPos" -> 
+        Hold[TypeSystem`NestedGrid`PackagePrivate`$vPos$$], "HPos" -> 
+        Hold[TypeSystem`NestedGrid`PackagePrivate`$hPos$$], "TopBar" -> 
+        Hold[TypeSystem`NestedGrid`PackagePrivate`$topBar$$], "BottomBar" -> 
+        Hold[TypeSystem`NestedGrid`PackagePrivate`$bottomBar$$], "OutputID" -> 
+        Hold[
+          TypeSystem`NestedGrid`PackagePrivate`localHold[
+          TypeSystem`NestedGrid`PackagePrivate`$outputID$$]]], StandardForm],
+      ImageSizeCache->{365., {299.6340332872234, 305.3659667127766}},
+      TrackedSymbols:>{
+       TypeSystem`NestedGrid`PackagePrivate`$state$$, 
+        TypeSystem`NestedGrid`PackagePrivate`$grid$$}], 
+     TypeSystem`NestedGrid`PackagePrivate`mouseAnnotation$$ = 
+     MouseAnnotation[],
+     ImageSizeCache->{365., {299.6340332872234, 305.3659667127766}}],
+    BaseStyle->{LineBreakWithin -> False},
+    DynamicModuleValues:>{},
+    Initialization:>(TypeSystem`NestedGrid`PackagePrivate`$outputID$$ = 
+     CreateUUID[]),
+    UnsavedVariables:>{TypeSystem`NestedGrid`PackagePrivate`$outputID$$}],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  Dataset`InterpretDataset[1],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ InitializationCell->True,
+ CellChangeTimes->{{3.894941521369032*^9, 3.8949415311668835`*^9}, 
+   3.8949415750235796`*^9, {3.8949416776270046`*^9, 3.8949417015542626`*^9}, 
+   3.894946719861761*^9, 3.894956218388029*^9, 3.895023257895217*^9, 
+   3.8952246663118258`*^9, 3.8952265570400667`*^9, 3.8952836054029417`*^9, 
+   3.8953021735840535`*^9, 3.895307433262322*^9, 3.8953078376715965`*^9, {
+   3.895715320179042*^9, 3.8957153250374393`*^9}, 3.9042728194507236`*^9, 
+   3.9042809538029757`*^9, 3.9042851402686377`*^9, 3.9042857313970785`*^9, 
+   3.9042934269975376`*^9, {3.9042995688723955`*^9, 3.9042995693577585`*^9}, 
+   3.9042996527659445`*^9, 3.9043543637950215`*^9, 3.9043549174448566`*^9, 
+   3.904371814258774*^9, 3.90464441087062*^9, {3.9046445456040926`*^9, 
+   3.9046445460723877`*^9}, 3.904644625315638*^9, 3.9055003281775703`*^9, 
+   3.905503134123395*^9, 3.925806414228471*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"0e28e7b0-3f59-453a-9c6a-393245fc655f"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nbrows", "=", 
+   RowBox[{"Length", "[", "dataset", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.904273629339365*^9, 3.9042736462041545`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"289486a6-316c-418c-a323-8f8441b5de32"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nbmonths", " ", "=", " ", "12"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.895302156309087*^9, 3.895302164092473*^9}, {
+  3.8953021969011807`*^9, 3.895302229543931*^9}, {3.9042729377996683`*^9, 
+  3.9042730027192316`*^9}, {3.90427306914193*^9, 3.9042730703289022`*^9}, {
+  3.9046447103690777`*^9, 3.9046447230565977`*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"ec772323-9c0e-4a4e-8b08-310fea784907"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nbyears", "=", 
+   RowBox[{"IntegerPart", "[", 
+    RowBox[{"nbrows", "/", "12"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.9042736643083706`*^9, 3.9042736725365143`*^9}, {
+  3.9042919130300436`*^9, 3.9042919227416906`*^9}, {3.9046446933392887`*^9, 
+  3.90464477185009*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"9a777b49-071a-4a73-9d3f-9149e571392e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "1"}], ",", 
+    RowBox[{"i", "\[LessEqual]", "nbyears"}], ",", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"incr", "=", 
+      RowBox[{"IntegerPart", "[", 
+       RowBox[{"12", 
+        RowBox[{"(", 
+         RowBox[{"i", "-", "1"}], ")"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"try", "[", "t_", "]"}], "=", 
+      RowBox[{
+       RowBox[{"Interpolation", "[", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"dataset", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], "[", 
+           RowBox[{"[", "k", "]"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", 
+            RowBox[{"incr", "+", "1"}], ",", 
+            RowBox[{"incr", "+", "12"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "2", ",", "3"}], "}"}]}], "]"}], " ", "]"}], "[",
+        "t", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"try", "[", "t", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], " ", 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"totaltry", "=", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{"try", "[", "t", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}]}], " ", ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"pic1", "=", 
+      RowBox[{"t", "/.", " ", 
+       RowBox[{"Last", "[", 
+        RowBox[{"NMaximize", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"try", "[", "t", "]"}], ",", 
+            RowBox[{"3", "<=", "t", "<", "11"}]}], "}"}], ",", "t"}], "]"}], 
+        "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"y", "/.", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+             RowBox[{"try", "[", "t", "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "1", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{"WhenEvent", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "\[Equal]", 
+               RowBox[{"0.50", "*", "totaltry"}]}], ",", 
+              "\"\<StopIntegration\>\""}], "]"}]}], "}"}], ",", "y", ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], ";", "\n", "  ", 
+     RowBox[{"pic2", "=", 
+      RowBox[{
+       RowBox[{"s", "[", "\"\<Domain\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"y", "/.", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+             RowBox[{"try", "[", "t", "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "1", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{"WhenEvent", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "\[Equal]", 
+               RowBox[{"0.25", "*", "totaltry"}]}], ",", 
+              "\"\<StopIntegration\>\""}], "]"}]}], "}"}], ",", "y", ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], ";", "\n", "  ", 
+     RowBox[{"deb", "=", 
+      RowBox[{
+       RowBox[{"s", "[", "\"\<Domain\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], " ", ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"y", "/.", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+             RowBox[{"try", "[", "t", "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "1", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{"WhenEvent", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "\[Equal]", 
+               RowBox[{"0.75", "*", "totaltry"}]}], ",", 
+              "\"\<StopIntegration\>\""}], "]"}]}], "}"}], ",", "y", ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], ";", "\n", "  ", 
+     RowBox[{"fin", "=", 
+      RowBox[{
+       RowBox[{"s", "[", "\"\<Domain\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"y", "/.", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+             RowBox[{"try", "[", "t", "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "1", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{"WhenEvent", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "\[Equal]", 
+               RowBox[{"0.05", "*", "totaltry"}]}], ",", 
+              "\"\<StopIntegration\>\""}], "]"}]}], "}"}], ",", "y", ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], ";", "\n", "  ", 
+     RowBox[{"deb2", "=", 
+      RowBox[{
+       RowBox[{"s", "[", "\"\<Domain\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], " ", ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"y", "/.", 
+       RowBox[{
+        RowBox[{"NDSolve", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+             RowBox[{"try", "[", "t", "]"}]}], ",", 
+            RowBox[{
+             RowBox[{"y", "[", "1", "]"}], "\[Equal]", "0"}], ",", 
+            RowBox[{"WhenEvent", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "\[Equal]", 
+               RowBox[{"0.95", "*", "totaltry"}]}], ",", 
+              "\"\<StopIntegration\>\""}], "]"}]}], "}"}], ",", "y", ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "11"}], "}"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], ";", "\n", "  ", 
+     RowBox[{"fin2", "=", 
+      RowBox[{
+       RowBox[{"s", "[", "\"\<Domain\>\"", "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"year", "=", 
+      RowBox[{"i", "+", "1998"}]}], " ", ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "1", "]"}], "=", 
+      RowBox[{"i", "+", "1998"}]}], " ", 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "2", "]"}], "=", "pic1"}], 
+     " ", 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "3", "]"}], "=", "pic2"}], 
+     " ", 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "4", "]"}], "=", "deb"}], 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "5", "]"}], "=", "fin"}], 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "6", "]"}], "=", 
+      RowBox[{"fin", "-", "deb"}]}], 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "7", "]"}], "=", 
+      RowBox[{
+       RowBox[{"dataset", "[", 
+        RowBox[{"[", 
+         RowBox[{"incr", "+", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", "5", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "8", "]"}], "=", "deb2"}], 
+     RowBox[{"(*", 
+      RowBox[{"//", "Print"}], "*)"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"phenindic", "[", "i", "]"}], "[", "9", "]"}], "=", "fin2"}], 
+     RowBox[{"(*", "Print", "*)"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.9042839315329175`*^9, 3.904283950650194*^9}, {
+   3.904283988408323*^9, 3.9042840193941298`*^9}, {3.9042840926724825`*^9, 
+   3.9042841064768114`*^9}, {3.904284146225066*^9, 3.9042841553972807`*^9}, {
+   3.9042842483489294`*^9, 3.90428424922148*^9}, {3.904284322327899*^9, 
+   3.904284378353451*^9}, {3.9042844117185574`*^9, 3.9042844270912647`*^9}, {
+   3.904284481237399*^9, 3.9042845112521963`*^9}, {3.9042845858287764`*^9, 
+   3.904284597558182*^9}, {3.904284663419402*^9, 3.9042847256768413`*^9}, {
+   3.9042847618514338`*^9, 3.904284820055637*^9}, {3.9042848573343215`*^9, 
+   3.904284858685861*^9}, {3.9042849074344378`*^9, 3.9042849096761*^9}, {
+   3.9042849780223594`*^9, 3.9042850319075212`*^9}, {3.9042850690017548`*^9, 
+   3.904285105622894*^9}, {3.9042851683378057`*^9, 3.90428517279241*^9}, {
+   3.9042852411901026`*^9, 3.9042852549281282`*^9}, 3.9042852865268073`*^9, {
+   3.904285503967534*^9, 3.9042855785360174`*^9}, {3.9042857019411755`*^9, 
+   3.904285714413105*^9}, {3.9042857697856874`*^9, 3.904285822348077*^9}, {
+   3.9042858584043007`*^9, 3.904285902409187*^9}, {3.9042859566007557`*^9, 
+   3.904286028784013*^9}, 3.904286116804515*^9, {3.9042862140412483`*^9, 
+   3.904286226436096*^9}, {3.9042862735516696`*^9, 3.9042862777511864`*^9}, {
+   3.9042863193753357`*^9, 3.9042863532386866`*^9}, {3.904286385038331*^9, 
+   3.904286402247868*^9}, {3.904286491014296*^9, 3.904286495332649*^9}, 
+   3.904286550138942*^9, {3.9042866133801565`*^9, 3.9042866277908916`*^9}, {
+   3.9042868040122337`*^9, 3.904286816593611*^9}, {3.9042868473543944`*^9, 
+   3.9042868539803514`*^9}, {3.9042870014492006`*^9, 
+   3.9042870049618964`*^9}, {3.904287054227458*^9, 3.904287083054163*^9}, {
+   3.9042871817551765`*^9, 3.904287199646322*^9}, {3.9042872339807563`*^9, 
+   3.904287235001218*^9}, {3.904287617741633*^9, 3.904287697013199*^9}, {
+   3.904287732450962*^9, 3.9042877337266083`*^9}, {3.9042877813597903`*^9, 
+   3.9042877881236553`*^9}, {3.9042878294775314`*^9, 
+   3.9042878735154715`*^9}, {3.904287908671048*^9, 3.9042879096606383`*^9}, {
+   3.904287994563371*^9, 3.904288064176955*^9}, {3.9042881003892307`*^9, 
+   3.9042881452457533`*^9}, {3.9042881753383846`*^9, 3.904288180591161*^9}, {
+   3.904288255708452*^9, 3.904288273389676*^9}, {3.904289153935785*^9, 
+   3.904289190039868*^9}, {3.904289230676568*^9, 3.9042892595549717`*^9}, {
+   3.904289329912917*^9, 3.904289339449211*^9}, {3.9042894549603643`*^9, 
+   3.9042894839709053`*^9}, {3.904289605822213*^9, 3.9042896308801546`*^9}, 
+   3.9042903277090406`*^9, {3.904290371624307*^9, 3.9042903725589733`*^9}, {
+   3.904290460303483*^9, 3.9042905068251076`*^9}, {3.9042907239403863`*^9, 
+   3.9042907260494175`*^9}, {3.9042907877866488`*^9, 
+   3.9042908002109966`*^9}, {3.904290848493506*^9, 3.904290852708582*^9}, {
+   3.9042908840750914`*^9, 3.9042909385076056`*^9}, 3.9042909692823935`*^9, 
+   3.9042910318987265`*^9, 3.904291104275812*^9, {3.90429115801143*^9, 
+   3.904291193861526*^9}, {3.9042912761881895`*^9, 3.9042913590261707`*^9}, {
+   3.904291406319006*^9, 3.9042914075249996`*^9}, {3.9042916036088467`*^9, 
+   3.9042916053313866`*^9}, {3.904291675489292*^9, 3.9042917032787447`*^9}, {
+   3.9042917465076137`*^9, 3.9042917530424404`*^9}, {3.9042918159524546`*^9, 
+   3.904291819729683*^9}, {3.904291880644353*^9, 3.9042918842295666`*^9}, {
+   3.9042919364126616`*^9, 3.904291950616496*^9}, {3.9042920408913193`*^9, 
+   3.9042920420816507`*^9}, {3.9042921001217813`*^9, 
+   3.9042921013593025`*^9}, {3.9042921512458553`*^9, 3.904292157752056*^9}, {
+   3.9042922023593907`*^9, 3.904292204654887*^9}, {3.9042922402634087`*^9, 
+   3.9042923194207306`*^9}, {3.9042923500965796`*^9, 
+   3.9042923684301805`*^9}, {3.904292410652927*^9, 3.904292425627386*^9}, {
+   3.9042925637126827`*^9, 3.9042925847934523`*^9}, {3.9042926547178955`*^9, 
+   3.904292659233773*^9}, {3.9042929455096703`*^9, 3.9042929554161277`*^9}, {
+   3.904293540171668*^9, 3.9042935414436436`*^9}, {3.9042935814977245`*^9, 
+   3.9042935982723174`*^9}, {3.9042937391249623`*^9, 3.904293740199668*^9}, {
+   3.9042937784649773`*^9, 3.9042937830673847`*^9}, {3.9042942957867527`*^9, 
+   3.904294296288166*^9}, {3.904294481410849*^9, 3.904294590397334*^9}, {
+   3.9043544079485965`*^9, 3.9043544157864995`*^9}, {3.90435509906806*^9, 
+   3.9043551300582733`*^9}, {3.9043552454697485`*^9, 3.904355252731311*^9}, {
+   3.9043719837693386`*^9, 3.9043719890819745`*^9}, {3.9055032135126266`*^9, 
+   3.9055032168197775`*^9}, {3.9055033876772594`*^9, 3.9055034380325675`*^9}, 
+   3.9258069305278*^9, {3.9258071341340847`*^9, 3.925807138586735*^9}, {
+   3.9258071952207785`*^9, 3.925807197867155*^9}, {3.9258073842829957`*^9, 
+   3.925807434524938*^9}, {3.925807521049366*^9, 3.9258075396809683`*^9}, {
+   3.925807653311149*^9, 3.925807976622182*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"b48b1c8f-1ded-44fc-bb90-751b44437cbe"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\<C:\\\\Paul\\\\2021-\\\\Projets structurants\\\\DS AMII FORESEA\\\\Work\
+\\\\TSA Herring\\\\SAS Results\\\\postmathematica_logbkC.csv\>\"", ",", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"phenindic", "[", "ii", "]"}], "[", "jj", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"ii", ",", "1", ",", "nbyears"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"jj", ",", "1", ",", "9"}], "}"}]}], "]"}]}], "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.8952259286516314`*^9, 3.8952259640522547`*^9}, {
+   3.8952916164734893`*^9, 3.895291733112238*^9}, {3.895291774709878*^9, 
+   3.895291895363262*^9}, {3.8952919489915004`*^9, 3.8952919747338114`*^9}, {
+   3.895292008966834*^9, 3.895292056146509*^9}, {3.895292162112214*^9, 
+   3.8952921641225243`*^9}, {3.8952921971511035`*^9, 
+   3.8952921992111855`*^9}, {3.8952924866350117`*^9, 
+   3.8952925184596834`*^9}, {3.8952926207098684`*^9, 3.895292626672344*^9}, {
+   3.895292660145543*^9, 3.8952926611523094`*^9}, {3.8952939735292444`*^9, 
+   3.8952939786430664`*^9}, {3.895294112212842*^9, 3.895294132522457*^9}, {
+   3.895295592345804*^9, 3.8952956023325634`*^9}, {3.8952956783909473`*^9, 
+   3.895295694958928*^9}, {3.895295743416456*^9, 3.8952957459987307`*^9}, {
+   3.8952962370079956`*^9, 3.8952962505460443`*^9}, {3.895302377621132*^9, 
+   3.895302380907937*^9}, {3.8953078226599216`*^9, 3.8953078237025547`*^9}, {
+   3.895715615696578*^9, 3.8957156166890993`*^9}, {3.904274825580036*^9, 
+   3.904274857337878*^9}, 3.9042926175068474`*^9, {3.9042938192791553`*^9, 
+   3.9042938221188116`*^9}, {3.904294373830355*^9, 3.904294375801215*^9}, {
+   3.90429472247193*^9, 3.904294755166403*^9}, {3.904294792676235*^9, 
+   3.9042948049986243`*^9}, {3.904299610363964*^9, 3.9042996105646067`*^9}, {
+   3.904300121958372*^9, 3.904300124069456*^9}, {3.9043544842887363`*^9, 
+   3.9043544852294245`*^9}, {3.9043718802764387`*^9, 3.904371898385764*^9}, {
+   3.904371931165681*^9, 3.904371933032035*^9}, 3.9055003100961246`*^9, {
+   3.9258080815384855`*^9, 3.925808082172904*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"de235b02-8afe-4bbf-9c49-e6fde5eef61c"],
+
+Cell[BoxData["\<\"C:\\\\Paul\\\\2021-\\\\Projets structurants\\\\DS AMII \
+FORESEA\\\\Work\\\\TSA Herring\\\\SAS Results\\\\postmathematica_logbkC.csv\"\
+\>"], "Output",
+ CellChangeTimes->{
+  3.9042947580498667`*^9, 3.904294811307108*^9, 3.9042995692638626`*^9, 
+   3.904299614231482*^9, 3.9042996968363047`*^9, 3.9043000933565016`*^9, 
+   3.904300128961622*^9, 3.9043545073503957`*^9, 3.904355294800373*^9, {
+   3.9043719088608246`*^9, 3.904371937919334*^9}, 3.90437200864222*^9, {
+   3.904644440817773*^9, 3.904644448816888*^9}, 3.904644485424346*^9, {
+   3.9046445459875536`*^9, 3.9046445879457684`*^9}, 3.9046446440504*^9, 
+   3.9046447549341516`*^9, 3.9046447975121517`*^9, 3.905503473552196*^9, 
+   3.9055036807645206`*^9, 3.9258070088362317`*^9, 3.9258080136302843`*^9, 
+   3.9258080866322746`*^9},
+ CellLabel->"Out[13]=",ExpressionUUID->"077bb357-ab3c-4605-a5ca-f75470ae8fa5"]
+}, Open  ]]
+},
+WindowSize->{1141.2, 579.6},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.3 pour Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"b2713c5b-9a13-4ac2-b939-02e0ffcc90bc"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 432, 9, 28, "Input",ExpressionUUID->"4cf1ddf0-db14-4b86-b1ce-a010b04bb1cc"],
+Cell[CellGroupData[{
+Cell[1015, 33, 955, 16, 80, "Input",ExpressionUUID->"387e6144-6e4f-475b-8500-08105472f35f",
+ InitializationCell->True],
+Cell[1973, 51, 135269, 2456, 624, "Output",ExpressionUUID->"0e28e7b0-3f59-453a-9c6a-393245fc655f",
+ InitializationCell->True]
+}, Open  ]],
+Cell[137257, 2510, 258, 5, 43, "Input",ExpressionUUID->"289486a6-316c-418c-a323-8f8441b5de32"],
+Cell[137518, 2517, 460, 8, 44, "Input",ExpressionUUID->"ec772323-9c0e-4a4e-8b08-310fea784907",
+ InitializationCell->True],
+Cell[137981, 2527, 394, 8, 43, "Input",ExpressionUUID->"9a777b49-071a-4a73-9d3f-9149e571392e"],
+Cell[138378, 2537, 14227, 317, 741, "Input",ExpressionUUID->"b48b1c8f-1ded-44fc-bb90-751b44437cbe"],
+Cell[CellGroupData[{
+Cell[152630, 2858, 2196, 36, 94, "Input",ExpressionUUID->"de235b02-8afe-4bbf-9c49-e6fde5eef61c",
+ InitializationCell->True],
+Cell[154829, 2896, 884, 13, 80, "Output",ExpressionUUID->"077bb357-ab3c-4605-a5ca-f75470ae8fa5"]
+}, Open  ]]
+}
+]
+*)
+
